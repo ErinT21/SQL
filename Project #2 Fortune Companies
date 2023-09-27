@@ -1,0 +1,28 @@
+#
+
+SELECT * 
+FROM fortune_companies
+
+
+SELECT AVG(avg_employee_tenure) AS tenure_years, industry
+FROM fortune_companies
+GROUP BY industry
+HAVING tenure_years>=3
+ORDER BY tenure_years desc
+
+
+SELECT *
+FROM fortune_companies
+WHERE employees >= 100000
+AND avg_employee_tenure >=6
+ORDER BY avg_employee_tenure desc;
+
+
+SELECT company_name, revenue,
+CASE WHEN revenue >=500 THEN "Top Earner"
+WHEN revenue >=300 THEN "Second Earner" 
+WHEN revenue >=200 THEN "Third Earner" 
+ELSE "no earnings"
+END AS revenue_earnings
+FROM fortune_companies
+ORDER BY revenue desc
