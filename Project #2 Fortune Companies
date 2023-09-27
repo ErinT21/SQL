@@ -13,6 +13,10 @@ CREATE TABLE fortune_companies (
 SELECT * 
 FROM fortune_companies
 
+#In this query I determined what the average empoyee tenure was greater than 3 years
+,based on the industry. I ordered the chart to show the tenure in years in desc order. With 
+this information, I was able to determine that, the Financial industry, averaged the greatest employee
+tenure at 6.9 years.
 
 SELECT AVG(avg_employee_tenure) AS tenure_years, industry
 FROM fortune_companies
@@ -21,13 +25,18 @@ HAVING tenure_years>=3
 ORDER BY tenure_years desc
 
 
+#In this query, I evaluated companies that had over 100000 employees and a employee
+tenure of greater than six years. By doing this, I determined that only 2 companies, 
+JP Morgan & Walmart had the highest average tenure with 6.9 & 6.2 years.
 SELECT *
 FROM fortune_companies
 WHERE employees >= 100000
 AND avg_employee_tenure >=6
 ORDER BY avg_employee_tenure desc;
 
-
+#In this query, I evaluated the company and their revenue to rank them from Top earner,
+second earner and third earner. Doing this I was able to determine that Walmart was the top earner
+in the data and company 1 had one of the lowest earnings. 
 SELECT company_name, revenue,
 CASE WHEN revenue >=500 THEN "Top Earner"
 WHEN revenue >=300 THEN "Second Earner" 
