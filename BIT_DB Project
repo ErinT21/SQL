@@ -4,20 +4,18 @@ SELECT *
 FROM BIT_DB.customers 
 WHERE JanSales
 
+#In this query, I ran the figures to evaluate how many orders were placed in janurary 
 SELECT COUNT(orderid)
 FROM BIT_DB.JanSales
 WHERE length(orderid)=6
 AND orderid<>'Order ID';
 
+#In this query, I wanted to know how many of those orders placed, were iphones 
 SELECT COUNT(orderid)
 FROM BIT_DB.JanSales
 WHERE Product='iPhone'
 
-SELECT * 
-FROM BIT_DB.FebSales
-WHERE length(orderid)=6
-AND orderid<>'Order ID';
-
+#In this query I evaluated all customer account numbers that placed an order in feburary 
 SELECT distinct acctnum 
 FROM BIT_DB.customers cust 
 
@@ -26,26 +24,35 @@ ON cust.order_id=FEB.orderid
 WHERE length(orderid) = 6 
 AND orderid <> 'Order ID';
 
+#In this query, I evaluated what the cheapest product in janurary was 
 SELECT product, min(price) 
 FROM BIT_DB.JanSales Jan 
 GROUP BY product, price 
 ORDER BY price ASC 
 LIMIT 1;
 
+#In this query I ran the total revenue for reach product sold in janurary 
 SELECT product,max(price)
 FROM BIT_DB.JanSales
 GROUP BY product,price
 ORDER BY price ASC
 
+
+
 SELECT sum(quantity)*price as revenue, product
 FROM BIT_DB.JanSales
 GROUP BY product 
 
+#I evaluated products sold at said address in feburary, including the total revenue of each 
+item
 SELECT sum(Quantity),product,
 sum(quantity)*price as revenue
 FROM BIT_DB.FebSales
 WHERE location='548 Lincoln St. Seattle, WA 98101'
 
+
+#I evaluated the sale orders in feburary and calcualated how many customers ordered 
+more than two products + the average amount spent for those customers 
 SELECT 
 count(distinct cust.acctnum), 
 avg(quantity*price) 
